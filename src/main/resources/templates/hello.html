@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Robin Corp Home Page</title>
+</head>
+<body>
+  <h2>Robin Corp Home Page</h2>
+    <hr>
+  <p>
+      User: <span sec:authentication="principal.username"></span><br>
+      Role: <span sec:authentication="principal.authorities"></span>
+  </p>
+  <hr>
+  <p>Welcome to Robin Corp Home Page</p>
+  <hr>
+  <div sec:authorize="hasRole('MANAGER')">
+  <a th:href="@{/leaders}">Leadership Meeting (Only for Managers)</a><br><br>
+  </div>
+  <div sec:authorize="hasRole('ADMIN')">
+  <a th:href="@{/systems}">IT Systems Meeting (Only for Admins)</a><br><br>
+  </div>
+
+<form action="#" th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout">
+</form>
+</body>
+</html>
